@@ -1,15 +1,15 @@
 <template>
   <div>
-    <contact-a theme="indigo" />
+    <contact-c theme="indigo" />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import ContactA from '~/components/contact/ContactA.vue'
+import ContactC from '~/components/contact/ContactC.vue'
 
 export default Vue.extend({
   name: 'IndexPage',
-  components: { ContactA },
+  components: { ContactC },
 })
 </script>
