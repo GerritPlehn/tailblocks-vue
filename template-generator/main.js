@@ -29,11 +29,11 @@ const main = () => {
         const dark = parser.parse(fs.readFileSync(darkName))
         processNodes(light, dark)
 
-        if (!fs.existsSync(`../components2/${blockName}`)) fs.mkdirSync(`../components2/${blockName}`)
+        if (!fs.existsSync(`../components/${blockName}`)) fs.mkdirSync(`../components/${blockName}`)
         /** @type {String} */
         let component = JSON.parse(JSON.stringify(template.toString()))
         let componentContent = light.toString()
-        componentContent = componentContent.replaceAll(/class="(.*indigo.*)"/gi, ':class="`$1`"')
+        componentContent = componentContent.replaceAll(/class="(.*indigo.*?)"/gi, ':class="`$1`"')
         // eslint-disable-next-line no-template-curly-in-string
         componentContent = componentContent.replaceAll(/indigo/gi, '${theme}')
         component = component.replace('<div>content</div>', componentContent)
