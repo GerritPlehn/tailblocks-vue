@@ -4,32 +4,33 @@ const template = fs.readFileSync('./template.vue')
 
 const main = () => {
   for (const blockName of [
-    'blog',
-    'contact',
-    'content',
-    'cta',
-    'ecommerce',
-    'feature',
-    'footer',
-    'gallery',
-    'header',
-    'hero',
-    'pricing',
-    'statistics',
-    'step',
-    'team',
-    'testimonial',
+    'Blog',
+    'Contact',
+    'Content',
+    'Cta',
+    'Ecommerce',
+    'Feature',
+    'Footer',
+    'Gallery',
+    'Header',
+    'Hero',
+    'Pricing',
+    'Statistics',
+    'Step',
+    'Team',
+    'Testimonial',
   ]) {
     for (const variant of ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']) {
-      const lightName = `../original/${blockName}/light${variant.toUpperCase()}.html`
-      const darkName = `../original/${blockName}/dark${variant.toUpperCase()}.html`
+      const lightName = `../original/${blockName.toLowerCase()}/light${variant.toUpperCase()}.html`
+      const darkName = `../original/${blockName.toLowerCase()}/dark${variant.toUpperCase()}.html`
       if (fs.existsSync(lightName)) {
         console.log(`processing ${lightName}`)
         const light = parser.parse(fs.readFileSync(lightName))
         const dark = parser.parse(fs.readFileSync(darkName))
         processNodes(light, dark)
 
-        if (!fs.existsSync(`../components/${blockName}`)) fs.mkdirSync(`../components/${blockName}`)
+        if (!fs.existsSync(`../components/${blockName.toLowerCase()}`))
+          fs.mkdirSync(`../components/${blockName.toLowerCase()}`)
         /** @type {String} */
         let component = JSON.parse(JSON.stringify(template.toString()))
         let componentContent = light.toString()
@@ -37,7 +38,7 @@ const main = () => {
         // eslint-disable-next-line no-template-curly-in-string
         componentContent = componentContent.replaceAll(/indigo/gi, '${theme}')
         component = component.replace('<div>content</div>', componentContent)
-        fs.writeFileSync(`../components/${blockName}/${blockName}${variant.toUpperCase()}.vue`, component)
+        fs.writeFileSync(`../components/${blockName.toLowerCase()}/${blockName}${variant.toUpperCase()}.vue`, component)
       }
     }
   }
